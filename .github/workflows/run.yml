@@ -1,0 +1,55 @@
+name: Run Quiz Updater
+
+on:
+  schedule:
+    # 01:30 VN = 18:30 UTC
+    - cron: "30 18 * * *"
+    # 01:50 VN = 18:50 UTC
+    - cron: "50 18 * * *"
+    # 02:10 VN = 19:10 UTC
+    - cron: "10 19 * * *"
+    # 02:30 VN = 19:30 UTC
+    - cron: "30 19 * * *"
+    # 02:50 VN = 19:50 UTC
+    - cron: "50 19 * * *"
+    # 03:10 VN = 20:10 UTC
+    - cron: "10 20 * * *"
+    # 03:30 VN = 20:30 UTC
+    - cron: "30 20 * * *"
+    # 03:50 VN = 20:50 UTC
+    - cron: "50 20 * * *"
+    # 04:10 VN = 21:10 UTC
+    - cron: "10 21 * * *"
+    # 04:30 VN = 21:30 UTC
+    - cron: "30 21 * * *"
+    # 04:50 VN = 21:50 UTC
+    - cron: "50 21 * * *"
+    # 05:00 VN = 22:00 UTC
+    - cron: "0 22 * * *"
+  workflow_dispatch:   # Cho phép chạy thủ công trong tab Actions
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      WP_USERNAME: ${{ secrets.WP_USERNAME }}
+      WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run quiz updater
+        run: python quiz_update.py
