@@ -30,14 +30,10 @@ def normalize(text: str) -> str:
 def get_auth_headers():
     print("WP_USERNAME exists:", bool(WP_USERNAME))
     print("WP_APP_PASSWORD exists:", bool(WP_APP_PASSWORD))
-
     if WP_USERNAME:
         print("WP_USERNAME preview:", WP_USERNAME[:3] + "***")
     if WP_APP_PASSWORD:
         print("WP_APP_PASSWORD length:", len(WP_APP_PASSWORD))
-
-    if not WP_USERNAME or not WP_APP_PASSWORD:
-        raise RuntimeError("Thiếu WP_USERNAME hoặc WP_APP_PASSWORD trong biến môi trường")
 
     token = base64.b64encode(f"{WP_USERNAME}:{WP_APP_PASSWORD}".encode()).decode("utf-8")
     return {
@@ -57,6 +53,19 @@ def get_auth_headers():
         "Accept": "application/json",
         "Content-Type": "application/json",
     }
+
+def test_wp_auth():
+    headers = get_auth_headers()
+
+    for test_url in [
+        "https://blog.mexc.fm/wp-json/",
+        "https://blog.mexc.fm/wp-json/wp/v2/users/me",
+        f"{WP_URL}/{POST_ID}",
+    ]:
+        r = requests.get(test_url, headers=headers, timeout=20)
+        print("\nTEST URL:", test_url)
+        print("STATUS:", r.status_code)
+        print("BODY:", r.text[:800])
 
 def next_tag_sibling(node: Tag):
     cur = node.next_sibling
@@ -258,6 +267,8 @@ def update_dropee_post(question, answer):
 if __name__ == "__main__":
     try:
         q1, a1 = scrape_dropee_site1()
+
+        test_wp_auth()
 
         if a1.strip() != CHECK_ANSWER.strip():
             print("✅ Site1 answer khác CHECK_ANSWER -> Update ngay")
