@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 WP_URL = "https://blog.mexc.fm/wp-json/wp/v2/posts"
 WP_USERNAME = os.getenv("WP_USERNAME")
 WP_APP_PASSWORD = os.getenv("WP_APP_PASSWORD")
-POST_ID = 323083  # <-- đổi thành ID bài Dropee cần update
+POST_ID =   # <-- đổi thành ID bài Dropee cần update
 CHECK_ANSWER = "Partnershipppp"  # <-- đáp án cũ dùng để đối chiếu
 
 SOURCE1_URL = "https://miningcombo.com/dropee/"
