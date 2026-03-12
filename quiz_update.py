@@ -28,6 +28,25 @@ def normalize(text: str) -> str:
     )
 
 def get_auth_headers():
+    print("WP_USERNAME exists:", bool(WP_USERNAME))
+    print("WP_APP_PASSWORD exists:", bool(WP_APP_PASSWORD))
+
+    if WP_USERNAME:
+        print("WP_USERNAME preview:", WP_USERNAME[:3] + "***")
+    if WP_APP_PASSWORD:
+        print("WP_APP_PASSWORD length:", len(WP_APP_PASSWORD))
+
+    if not WP_USERNAME or not WP_APP_PASSWORD:
+        raise RuntimeError("Thiếu WP_USERNAME hoặc WP_APP_PASSWORD trong biến môi trường")
+
+    token = base64.b64encode(f"{WP_USERNAME}:{WP_APP_PASSWORD}".encode()).decode("utf-8")
+    return {
+        "Authorization": f"Basic {token}",
+        "User-Agent": "Mozilla/5.0",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+    
     if not WP_USERNAME or not WP_APP_PASSWORD:
         raise RuntimeError("Thiếu WP_USERNAME hoặc WP_APP_PASSWORD trong biến môi trường")
 
