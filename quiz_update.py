@@ -217,6 +217,7 @@ def update_dropee_post(question, answer):
         p2.append(s2)
         p2.append(" ")
         p2.append(s3)
+        p2.append(" ")
         p2.append(question)
     else:
         # fallback nếu p2 không đúng format strong như mong đợi
@@ -232,6 +233,7 @@ def update_dropee_post(question, answer):
         p2.append(s2)
         p2.append(" ")
         p2.append(s3)
+        p2.append(" ")
         p2.append(question)
 
     # p3 format:
