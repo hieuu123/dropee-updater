@@ -8,11 +8,11 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 WP_URL = "https://blog.mexc.fm/wp-json/wp/v2/posts"
 WP_USERNAME = os.getenv("WP_USERNAME")
 WP_APP_PASSWORD = os.getenv("WP_APP_PASSWORD")
-POST_ID = 331525  # <-- đổi thành ID bài Dropee cần update
-CHECK_ANSWER = "Shut Down"  # <-- đáp án cũ dùng để đối chiếu
+POST_ID = 331815  # <-- đổi thành ID bài Dropee cần update
+CHECK_ANSWER = "Demand"  # <-- đáp án cũ dùng để đối chiếu
 
 SOURCE1_URL = "https://miningcombo.com/dropee/"
-SOURCE2_URL = "https://www.quiknotes.in/dropee-question-of-the-day-17-april-2026/"
+SOURCE2_URL = "https://www.quiknotes.in/dropee-question-of-the-day-18-april-2026/"
 
 # ================= HELPERS =================
 def normalize(text: str) -> str:
